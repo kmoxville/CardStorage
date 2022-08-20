@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardStorage", "CardStorage.csproj", "{B2B1955E-2728-40D3-B16E-32FCAD89CA92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2B1955E-2728-40D3-B16E-32FCAD89CA92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2B1955E-2728-40D3-B16E-32FCAD89CA92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2B1955E-2728-40D3-B16E-32FCAD89CA92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2B1955E-2728-40D3-B16E-32FCAD89CA92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B659F20-8777-49ED-BD1C-966649241A9B}
+	EndGlobalSection
+EndGlobal
