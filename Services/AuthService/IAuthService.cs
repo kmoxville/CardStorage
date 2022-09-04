@@ -6,5 +6,7 @@ namespace CardStorage.Services.AuthService
     public interface IAuthService
     {
         public Task<LoginResponse> LoginAsync(LoginRequest request);
+
+        public Task<CreateResponse> CreateAsync(CreateRequest request);
     }
 }

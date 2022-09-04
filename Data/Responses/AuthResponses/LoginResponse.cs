@@ -1,6 +1,6 @@
 ﻿namespace CardStorage.Data.Responses.AuthResponses
 {
-    public class LoginResponse
+    public class LoginResponse : Response
     {
         public AuthStatuses Status;
 

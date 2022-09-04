@@ -20,11 +20,13 @@ namespace CardStorage.Services.AuthService
             _scopeFactory = scopeFactory;
         }
 
+        public static string SecretKey = "testytrfhtfhgfhgfuyfut78yt87g87gh98h98y987tgyugfyug";
+
         public async Task<LoginResponse> LoginAsync(LoginRequest request)
         {
             var scope = _scopeFactory.CreateScope();
             var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-            var response = new LoginResponse() { Status = Data.Responses.AuthStatuses.Fail };
+            var response = new LoginResponse() { Status = Data.Responses.AuthStatuses.Fail, Success = false };
 
             var account = unitOfWork.Accounts.GetAll()
                 .FirstOrDefault(x => x.Email == request.UserName);
@@ -32,6 +34,7 @@ namespace CardStorage.Services.AuthService
             if (account != null && Password.VerifyPassword(request.Password, account.PasswordHash, account.PasswordSalt))
             {
                 response.Status = Data.Responses.AuthStatuses.Success;
+                response.Success = true;
             }
             else
             {
@@ -55,7 +58,7 @@ namespace CardStorage.Services.AuthService
         private string CreateSessionToken(Account account)
         {
             JwtSecurityTokenHandler tokenHadler = new JwtSecurityTokenHandler();
-            byte[] key = Encoding.ASCII.GetBytes("test");
+            byte[] key = Encoding.ASCII.GetBytes(SecretKey);
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(
@@ -68,6 +71,43 @@ namespace CardStorage.Services.AuthService
             };
             var token = tokenHadler.CreateJwtSecurityToken(tokenDescriptor);
             return tokenHadler.WriteToken(token);
+        }
+
+        public async Task<CreateResponse> CreateAsync(CreateRequest request)
+        {
+            var scope = _scopeFactory.CreateScope();
+            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+            var response = new CreateResponse() { Success = false };
+
+            var alreadyExists = unitOfWork.Accounts.GetAll().Any(x => x.Email == request.UserName);
+            if (alreadyExists)
+            {
+                response.ErrorMessage = "Account with this name already exists";
+                return response;
+            }
+
+            Password password = new Password(request.Password);
+
+            Account newAccount = new Account()
+            {
+                Email = request.UserName,
+                PasswordSalt = password.Salt,
+                PasswordHash = password.Hash
+            };
+
+            try
+            {
+                await unitOfWork.Accounts.InsertAsync(newAccount);
+                await unitOfWork.Accounts.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                response.ErrorMessage = ex.Message;
+                return response;
+            }
+
+            response.Success = true;
+            return response;
         }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CardStorage.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220903081658_AddAccounts")]
+    [Migration("20220904181132_AddAccounts")]
     partial class AddAccounts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,6 +106,10 @@ namespace CardStorage.Data.Migrations
 
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
