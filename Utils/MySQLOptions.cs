@@ -14,7 +14,8 @@
 
         public string GetConnectionString()
         {
-            return $"server={Server};user={User};password={Password};database={Scheme}";
+            var decryptedPwd = EncryptionHelper.Decrypt(Password);
+            return $"server={Server};user={User};password={decryptedPwd};database={Scheme}";
         }
     }
 }
