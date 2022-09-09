@@ -6,6 +6,8 @@ namespace CardStorage.Data.UnitOfWork
     {
         IRepository<Client> Clients { get; }
         IRepository<ClientCard> Cards { get; }
+        IRepository<Account> Accounts { get; }
+        IRepository<Session> Sessions { get; }
 
         Task SaveAsync();
     }

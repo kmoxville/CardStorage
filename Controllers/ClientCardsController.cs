@@ -3,9 +3,11 @@ using CardStorage.Data.Entities;
 using CardStorage.Data.UnitOfWork;
 using AutoMapper;
 using CardStorage.Data.Requests.CardsControllerRequests;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CardStorage.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientCardsController : ControllerBase
