@@ -49,6 +49,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddEntityFrameworkSqlite().AddDbContext<DatabaseContext>();
 builder.Services.AddUnitOfWork();
+builder.Services.AddDataProtection();
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddAuthService();
 builder.Services.AddAuthentication(x =>
