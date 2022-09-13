@@ -1,6 +1,7 @@
 using CardStorage.Data;
 using CardStorage.Data.UnitOfWork;
 using CardStorage.Services.AuthService;
+using CardStorage.Services.Validation;
 using CardStorage.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ builder.Services.AddDatabaseContext(builder.Configuration, builder.Environment.I
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddValidators();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "CardStorageService", Version = "v1" });
